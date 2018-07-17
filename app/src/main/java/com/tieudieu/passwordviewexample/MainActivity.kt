@@ -1,4 +1,4 @@
-package com.tieudieu.passwordview
+package com.tieudieu.passwordviewexample
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle

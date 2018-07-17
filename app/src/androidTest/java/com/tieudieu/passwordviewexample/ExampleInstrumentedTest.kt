@@ -1,4 +1,4 @@
-package com.tieudieu.passwordview
+package com.tieudieu.passwordviewexample
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4

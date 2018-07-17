@@ -1,4 +1,4 @@
-package com.tieudieu.passwordview
+package com.tieudieu.passwordviewexample
 
 import org.junit.Test
 
