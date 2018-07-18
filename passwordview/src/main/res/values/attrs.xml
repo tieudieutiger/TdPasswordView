@@ -17,6 +17,14 @@
 
         </attr>
 
+        <attr name="tdpi_password_type">
+
+            <flag name="password" value="1" />
+
+            <flag name="otp" value="2" />
+
+        </attr>
+
     </declare-styleable>
 
 </resources>

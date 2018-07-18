@@ -4,17 +4,16 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.Rect
 import android.text.Editable
-import android.text.InputType
 import android.text.TextWatcher
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import android.view.animation.CycleInterpolator
 import android.view.inputmethod.InputMethodManager
 import android.widget.RelativeLayout
+import kotlinx.android.synthetic.main.password_input_slot_view.view.*
 
 import kotlinx.android.synthetic.main.password_view.view.*
-import android.R.attr.password
-import android.util.Log
 
 
 class PasswordView : RelativeLayout {
@@ -31,6 +30,7 @@ class PasswordView : RelativeLayout {
     private var hintColor: Int = 0
     private var passwordLength = PASSWORD_LENGTH_DEFAULT
     private lateinit var inputType: InputType
+    private lateinit var passwordType: PasswordType
 
     private var password: String = ""
     private var keyboardVisible = false
@@ -73,6 +73,9 @@ class PasswordView : RelativeLayout {
 
         var inputTypeValue = typedArray.getInteger(R.styleable.TdPasswordInput_tdpi_input_type, InputType.NUMBER.attrValue)
         inputType = InputType.fromValue(inputTypeValue)
+
+        var passwordTypeValue = typedArray.getInteger(R.styleable.TdPasswordInput_tdpi_password_type, PasswordType.PASSWORD.attrValue)
+        passwordType = PasswordType.fromValue(passwordTypeValue)
 
         typedArray.recycle()
 
@@ -148,9 +151,6 @@ class PasswordView : RelativeLayout {
                     }
             )
 
-        } else {
-
-
         }
     }
 
@@ -162,17 +162,16 @@ class PasswordView : RelativeLayout {
 
         password = ""
 
+        layout_input_password.setPasswordType(passwordType)
         layout_input_password.setPasswordLength(passwordLength)
         layout_input_password.initView()
 
-        if (inputType == InputType.NUMBER)
-            edt_input_password_real.inputType = android.text.InputType.TYPE_CLASS_NUMBER
-        else
-            edt_input_password_real.inputType = android.text.InputType.TYPE_CLASS_TEXT
-
-
         btn_password_view_on_focus.setOnClickListener {
 
+            // select endPosition
+            edt_input_password_real.setSelection(edt_input_password_real.text.toString().length)
+
+            // focus real edt
             edt_input_password_real.requestFocus()
 
             if (!keyboardVisible)
@@ -207,7 +206,11 @@ class PasswordView : RelativeLayout {
     private fun showInput(value: String, hasFocus: Boolean) {
 
         // onEntered on [length -1]
-        layout_input_password.onEntered(value.length - 1)
+        if (value.isNotEmpty()) {
+
+            val letter = value[value.length - 1]
+            layout_input_password.onEntered(value.length - 1, letter)
+        }
 
         // onInput on [length]
         layout_input_password.onInput(value.length)
@@ -237,11 +240,8 @@ class PasswordView : RelativeLayout {
 
     private fun charIsValid(unicodeChar: Char): Boolean {
 
-        Log.d("PV", "xxx-charIsValid-" + unicodeChar)
-
         return if (inputType == InputType.NUMBER)
             Character.isDigit(unicodeChar)
-
         else
             true
     }
@@ -256,6 +256,18 @@ class PasswordView : RelativeLayout {
     fun setOnPasswordEnterListener(listener: OnPasswordEnterListener) {
 
         this.onPasswordEnterListener = listener
+    }
+
+    fun setPassword(password: String): Boolean {
+
+        if (passwordLength <= 0 || password.length != passwordLength)
+            return false
+
+        this.password = password
+
+        edt_input_password_real.setText(password)
+
+        return layout_input_password.setPassword(password)
     }
 
     /**
@@ -311,6 +323,50 @@ class PasswordView : RelativeLayout {
 
                     1 -> return NUMBER
                     2 -> return FREE
+                }
+                throw IllegalArgumentException("This value is not supported for DateFormat: $value")
+            }
+        }
+    }
+
+    /**
+     * PasswordType
+     */
+
+    enum class PasswordType {
+
+        PASSWORD,
+        OTP;
+
+        val value: String
+            get() {
+
+                return when (this) {
+                    PASSWORD -> "password"
+                    OTP -> "otp"
+                }
+                throw IllegalArgumentException("Not value available for this DateFormat: " + this)
+            }
+
+        val attrValue: Int
+            get() {
+
+                return when (this) {
+                    PASSWORD -> 1
+                    OTP -> 2
+                }
+
+                throw IllegalArgumentException("Not value available for this DateFormat: " + this)
+            }
+
+        companion object {
+
+            fun fromValue(value: Int): PasswordType {
+
+                when (value) {
+
+                    1 -> return PASSWORD
+                    2 -> return OTP
                 }
                 throw IllegalArgumentException("This value is not supported for DateFormat: $value")
             }

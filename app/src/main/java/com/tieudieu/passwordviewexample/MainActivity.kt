@@ -19,5 +19,7 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+
+        password_view.setPassword("12345")
     }
 }

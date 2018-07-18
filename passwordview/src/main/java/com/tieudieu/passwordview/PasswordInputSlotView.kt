@@ -137,10 +137,17 @@ class PasswordInputSlotView : LinearLayout {
         setText(getPasswordSlotHint())
     }
 
-    fun onEntered() {
+    /*fun onEntered() {
+
+        onEntered(getPasswordSlotLetter())
+    }*/
+
+    fun onEntered(letter: String) {
 
         setTextColor(textColor)
-        setText(getPasswordSlotLetter())
+        setText(letter)
+
+        onPass()
     }
 
 }

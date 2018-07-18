@@ -17,6 +17,7 @@ class PasswordInputView : LinearLayout {
     private var hintColor: Int = 0
 
     private var passwordLength = 0
+    private lateinit var passwordType: PasswordView.PasswordType
 
     private var passwordSlotViews = ArrayList<PasswordInputSlotView>()
 
@@ -85,6 +86,14 @@ class PasswordInputView : LinearLayout {
         addView(slotView)
     }
 
+    private fun parsePassSlotLetter(letter: Char): String {
+
+        return if (passwordType == PasswordView.PasswordType.PASSWORD)
+            context.getString(R.string.pass_slot)
+        else
+            letter.toString()
+    }
+
     /**
      * Public functions
      */
@@ -97,6 +106,26 @@ class PasswordInputView : LinearLayout {
     fun setPasswordLength(length: Int) {
 
         passwordLength = length
+    }
+
+    fun setPasswordType(type: PasswordView.PasswordType) {
+
+        passwordType = type
+    }
+
+    fun setPassword(password: String): Boolean {
+
+        if (passwordLength <= 0 || password.isEmpty() || passwordSlotViews.isEmpty() || passwordSlotViews.size != password.length)
+            return false
+
+        clear()
+
+        for (index in 0..(passwordSlotViews.size - 1)) {
+            onEntered(index, password[index])
+        }
+
+        return true
+
     }
 
     fun onViewFocus(hasFocus: Boolean, valueLength: Int) {
@@ -139,12 +168,21 @@ class PasswordInputView : LinearLayout {
         passwordSlotViews[index].onInput()
     }
 
-    fun onEntered(index: Int) {
+    /*fun onEntered(index: Int) {
 
         if (passwordSlotViews == null || index < 0 || index >= passwordSlotViews.size)
             return
 
         passwordSlotViews[index].onEntered()
+
+    }*/
+
+    fun onEntered(index: Int, letter: Char) {
+
+        if (passwordSlotViews == null || index < 0 || index >= passwordSlotViews.size)
+            return
+
+        passwordSlotViews[index].onEntered(parsePassSlotLetter(letter))
 
     }
 
