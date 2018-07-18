@@ -4,25 +4,17 @@
     <declare-styleable name="TdPasswordInput">
 
         <attr name="tdpi_password_length" format="integer" />
-
         <attr name="tdpi_text_color" format="color" />
-
         <attr name="tdpi_hint_color" format="color" />
 
         <attr name="tdpi_input_type">
-
             <flag name="number" value="1" />
-
             <flag name="free" value="2" />
-
         </attr>
 
         <attr name="tdpi_password_type">
-
             <flag name="password" value="1" />
-
             <flag name="otp" value="2" />
-
         </attr>
 
     </declare-styleable>
