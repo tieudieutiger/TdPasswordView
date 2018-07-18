@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">passwordview</string>
+
+    <string name="pass_slot">*</string>
+    <string name="pass_slot_hint"> </string>
+
+
 </resources>
