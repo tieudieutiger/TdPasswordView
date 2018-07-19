@@ -24,6 +24,4 @@ compile 'com.tieudieu.passwordview:passwordview:0.0.1'
 
 ##  Demo
 
-![Demo](https://raw.githubusercontent.com/tieudieutiger/TdPasswordView/master/docs/Pic1.png "Demo")
-![Demo](https://raw.githubusercontent.com/tieudieutiger/TdPasswordView/master/docs/Pic2.png "Demo")
-![Demo](https://raw.githubusercontent.com/tieudieutiger/TdPasswordView/master/docs/Pic3.png "Demo")
+![Demo](https://raw.githubusercontent.com/tieudieutiger/TdPasswordView/master/docs/Pic1.png https://raw.githubusercontent.com/tieudieutiger/TdPasswordView/master/docs/Pic2.png https://raw.githubusercontent.com/tieudieutiger/TdPasswordView/master/docs/Pic3.png "Demo")
