@@ -24,11 +24,4 @@ compile 'com.tieudieu.passwordview:passwordview:0.0.1'
 
 ##  Demo
 
-
-![Example1](docs/Pic1.png)
-
-
-![Example2](docs/Pic2.png)
-
-
-![Example3](docs/Pic3.png)
+<img src="docs/Pic1.png" height='auto' width='280'/><img src="docs/Pic2.png" height='auto' width='280'/><img src="docs/Pic3.png" height='auto' width='280'/>
