@@ -24,4 +24,4 @@ compile 'com.tieudieu.passwordview:passwordview:0.0.1'
 
 ##  Demo
 
-<img src="docs/Pic1.png" height='auto' width='280' style="margin:50px 50px"/><img src="docs/Pic2.png" height='auto' width='280' style="margin:50px 50px"/><img src="docs/Pic3.png" height='auto' width='280' style="margin:50px 10px"/>
+<img src="docs/Pic1.png" height='auto' width='280' margin-right='10'/><img src="docs/Pic2.png" height='auto' width='280' style="margin:50px 50px"/><img src="docs/Pic3.png" height='auto' width='280' style="margin:50px 10px"/>
